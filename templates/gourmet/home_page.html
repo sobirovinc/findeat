@@ -1,0 +1,296 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+
+    .big-section{
+            padding-left: 8%;
+            padding-right: 8%;
+        }
+    .recently-searched, .places-nearby, .suggests {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+        justify-content: left;
+    }
+
+    .card-block-title {
+        padding-top: 20px;
+        display: flex;
+        justify-content: left;
+    }
+
+    .card-image {
+        height: 288px;
+        width: 288px;
+    }
+
+    .visible-form {
+        display: flex;
+    }
+    .name-field {
+        width: 80%;
+    }
+    .hidden-form {
+        display: flex;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+ <div class="container mt-4">
+        <form method="post" class="form-inline justify-content-center form-field-general" action="{% url 'gourmet:home' %}">
+            {% csrf_token %}
+         <div class="visible-form row">
+            <div class="form-group col-5 mr-6 name-field">
+                {{ form.name }}
+            </div>
+
+            <button class="btn btn-success col mr-6" style="margin-right: 5px;" type="submit">検索</button>
+            <button class="btn btn-outline-secondary col" type="button" data-bs-toggle="collapse" data-bs-target="#filterSection" aria-expanded="false" aria-controls="filterSection">
+                絞り込み
+            </button>
+         </div>
+
+            <div class="collapse mt-3 w-100" id="filterSection">
+                <div class="card card-body">
+                    <div class="form-row row hidden-form">
+                        <div class="form-group col col-md-3">
+                            {{ form.genre.label_tag }}
+                            {{ form.genre }}
+                        </div>
+
+                        <div class="form-group col col-md-3">
+                            {{ form.range.label_tag }}
+                            {{ form.range }}
+                        </div>
+
+                            <div class="w-100"></div>
+
+                        <div class="form-group col col-md-3">
+                            {{ form.budget.label_tag }}
+                            {{ form.budget }}
+                        </div>
+
+                        <div class="form-group col col-md-3">
+                            {{ form.party_capacity.label_tag }}
+                            {{ form.party_capacity }}
+                        </div>
+                    </div>
+
+                    <div class="form-row hidden-form row">
+                        <div class="form-group col col-md-6">
+                            <div class="form-check" style="width: 70% !important">
+                                {{ form.parking }}
+                                {{ form.parking.label_tag }}
+                            </div>
+                        </div>
+                        <div class="form-group col col-md-6">
+                            <div class="form-check">
+                                {{ form.credit_card }}
+                                {{ form.credit_card.label_tag }}
+                            </div>
+                        </div>
+                        <input type="hidden" name="lat" id="id_lat">
+                        <input type="hidden" name="lng" id="id_lng">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<div class="big-section big-section">
+    <h3 class="card-block-title">閲覧履歴</h3>
+    <div class="recently-searched" id="history">
+        {% for i in loader_count %}
+        <div class="card" style="width: 18rem;">
+            <div class="d-flex justify-content-center my-5">
+              <div class="spinner-border my-5" role="status">
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                                <br>
+                <div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div>
+                                <br>
+                                <br>
+                <button class="btn btn-primary" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  詳細を見る
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <hr>
+
+    <h3 class="card-block-title">近くのスポット</h3>
+    <div class="places-nearby" id="places-nearby">
+
+{% for i in loader_count %}
+        <div class="card" style="width: 18rem;">
+            <div class="d-flex justify-content-center my-5">
+              <div class="spinner-border my-5" role="status">
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                                <br>
+                <div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div>
+                                <br>
+                                <br>
+                <button class="btn btn-primary" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  詳細を見る
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+
+        </div>
+    <hr>
+
+    <h3 class="card-block-title">おすすめ</h3>
+    <div class="suggests" id="suggests">
+        {% for i in loader_count %}
+        <div class="card" style="width: 18rem;">
+            <div class="d-flex justify-content-center my-5">
+              <div class="spinner-border my-5" role="status">
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                <div class="spinner-grow spinner-grow card-title" role="status">
+                </div>
+                                <br>
+                <div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div><div class="spinner-grow spinner-grow-sm card-text" role="status">
+                </div>
+                                <br>
+                                <br>
+                <button class="btn btn-primary" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  詳細を見る
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+ {% block extra_js %}
+<script>
+navigator.geolocation.getCurrentPosition(
+  (position) => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    document.getElementById('id_lat').value = latitude;
+    document.getElementById('id_lng').value = longitude;
+
+    // Fetch nearby places
+    fetch(`/nearby-places/${latitude}/${longitude}/`)
+      .then((response) => response.json())
+      .then((data) => {
+        const nearbyContainer = document.getElementById("places-nearby");
+        nearbyContainer.innerHTML = "";
+        data.results.shop.forEach((shopObj) => {
+          const html = `
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top card-image" src="${shopObj.logo_image}" alt="${shopObj.name}">
+              <div class="card-body">
+                <h5 class="card-title">${shopObj.name}</h5>
+                <p class="card-text">${shopObj.catch || 'No description available.'}</p>
+                <a href="/detail/${shopObj.id}/" class="btn btn-primary">詳細を見る</a>
+              </div>
+            </div>
+          `;
+          nearbyContainer.innerHTML += html;
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching nearby places:", error);
+      });
+
+      // Fetch nearby suggestions
+    fetch(`/suggestions/${latitude}/${longitude}/`)
+      .then((response) => response.json())
+      .then((data) => {
+        const suggestionsContainer = document.getElementById("suggests");
+        suggestionsContainer.innerHTML = "";
+        data.suggestions.forEach((shopObj) => {
+          const html = `
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top card-image" src="${shopObj.logo_image}" alt="${shopObj.name}">
+              <div class="card-body">
+                <h5 class="card-title">${shopObj.name}</h5>
+                <p class="card-text">${shopObj.catch || 'No description available.'}</p>
+                <a href="/detail/${shopObj.id}/" class="btn btn-primary">詳細を見る</a>
+              </div>
+            </div>
+          `;
+          suggestionsContainer.innerHTML += html;
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching suggestions:", error);
+      });
+
+    // Fetch history
+    fetch(`/history/`)
+      .then((response) => response.json())
+      .then((data) => {
+        const historyContainer = document.getElementById("history");
+        historyContainer.innerHTML = "";
+        data.history.forEach((shopObj) => {
+          const html = `
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top card-image" src="${shopObj.logo_image}" alt="${shopObj.name}">
+              <div class="card-body">
+                <h5 class="card-title">${shopObj.name}</h5>
+                <p class="card-text">${shopObj.catch || 'No description available.'}</p>
+                <a href="/detail/${shopObj.id}/" class="btn btn-primary">詳細を見る</a>
+              </div>
+            </div>
+          `;
+          historyContainer.innerHTML += html;
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching history:", error);
+      });
+  },
+  (error) => {
+    console.error("Location error:", error);
+  });
+
+</script>
+{% endblock %}

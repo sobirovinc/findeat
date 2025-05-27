@@ -1,0 +1,9 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="text-center my-5">
+  <img src="{% static 'error/error_sorry.png' %}" class="img-fluid" style="width: 20%;" alt="error img">
+  <h1 class="mt-4">エラーが発生しました。<br>フォームを確認して再度検索してください。</h1>
+</div>
+{% endblock %}
