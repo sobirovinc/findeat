@@ -1,10 +1,11 @@
 import random
 
 import requests
+from decouple import config
 from requests.exceptions import Timeout, RequestException
 
-google_maps_api_key = 'AIzaSyCCY7ZQ75CMe7sY8JDNhhQbv3U45MCLoqk'
-api_key = 'd668191c983bb4ed'
+google_maps_api_key = config('google_maps_api_key')
+api_key = config('gourmet_api_key')
 url = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/'
 
 # function gets any parameter and gives back a json response
