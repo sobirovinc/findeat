@@ -23,11 +23,13 @@ class HomePageView(View):
     def post(self, request):
         form = GourmetSearchForm(request.POST)
         params = {}
+
         if form.is_valid():
             for k, v in form.cleaned_data.items():
-                # checking if values is exists, and if exists adding to params dict to send it api
-                print(f"{k}:{v}")
-                if v is not None and v != '' and v != False:
+                # Explicitly handle booleans: credit_card and parking
+                if k in ['card', 'parking']:
+                    params[k] = 1 if v else 0
+                elif v not in [None, '', False]:
                     params[k] = v
 
                 # we find nearby places only if range is set

@@ -94,7 +94,7 @@ class GourmetSearchForm(forms.Form):
     ))
 
     parking = forms.BooleanField(required=False, label="駐車場あり")
-    credit_card = forms.BooleanField(required=False, label="クレジットカード利用可")
+    card = forms.BooleanField(required=False, label="クレジットカード利用可")
 
 
 

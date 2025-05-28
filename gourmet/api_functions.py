@@ -16,11 +16,11 @@ def gourmet(parameters):
     }
 
     # the form might give true or false but the api wants 0 or 1, so we have to check and convert
-    if parameters.get('credit_card'):
-        parameters['credit_card'] = 1
-
-    if parameters.get('parking'):
-        parameters['parking'] = 1
+    # if parameters.get('card'):
+    #     parameters['card'] = 1
+    #
+    # if parameters.get('parking'):
+    #     parameters['parking'] = 1
 
     # adding given parameters to the parameters that built in
     params.update(parameters)
