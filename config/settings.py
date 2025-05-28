@@ -81,11 +81,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse("postgresql://findeat_db_user:bdKs7GihCwSFVqhUC2hQHjMdnWLAzfO1@dpg-d0ra9vndiees73br5m60-a.oregon-postgres.render.com/findeat_db")
 }
 
 STATICFILES_STORAGES = "whitenoise.storage.CompressedManifestStaticFilesStorage"
