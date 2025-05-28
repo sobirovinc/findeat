@@ -2,15 +2,18 @@ from django import forms
 
 
 class GourmetSearchForm(forms.Form):
-    name = forms.CharField(required=False, widget=forms.TextInput(
-        attrs={
-            'placeholder': 'グルメ名を入力してください。。。',
-            'class': 'form-control mr-2'
-        }
+    name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'グルメ名を入力してください。。。',
+                'class': 'form-control mr-2'
+            }
     ))
 
     range = forms.ChoiceField(
         required=False,
+        label='検索範囲',
         choices=[
             ('', ''),
             (1, '300m'),
@@ -24,6 +27,7 @@ class GourmetSearchForm(forms.Form):
 
     genre = forms.ChoiceField(
         required=False,
+        label='ジャンル',
         choices=[
             ('', ''),
             ('G001', '居酒屋'),
@@ -49,6 +53,7 @@ class GourmetSearchForm(forms.Form):
 
     budget = forms.ChoiceField(
         required=False,
+        label='予算',
         choices=[
             ('', ''),
             ('B009', '~500円'),
@@ -81,6 +86,7 @@ class GourmetSearchForm(forms.Form):
 
     party_capacity = forms.IntegerField(
         required=False,
+        label='宴会収容人数（最小）',
         widget=forms.TextInput(attrs={
             'placeholder': '宴会の最小収容人数を入力してください。。。',
             'class': 'form-control mr-2'

@@ -175,7 +175,13 @@
   </div>
 </div>
 
-<div id="map" style="height: 400px;"></div>
+<div id="map" style="height: 400px;">
+  <div class="d-flex justify-content-center">
+  <div class="spinner-border mx-5" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+</div>
 
 <!--    <h3 class="card-block-title">おすすめ</h3>-->
 <!--    <div class="suggests" id="suggests">-->
@@ -207,9 +213,6 @@
 {% endblock %}
 
 {% block extra_js %}
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap">
-</script>
 
 <script src="https://kit.fontawesome.com/6e6fff6370.js" crossorigin="anonymous"></script>
 
@@ -253,13 +256,15 @@
 <!--</script>-->
 
 <script>
-function initMap() {
+let map;
+
+window.initMap = function () {
   const geocoder = new google.maps.Geocoder();
   const address = "{{ shop.address|escapejs }}";
 
   geocoder.geocode({ address: address }, function(results, status) {
     if (status === "OK") {
-      const map = new google.maps.Map(document.getElementById("map"), {
+      map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
         center: results[0].geometry.location
       });
@@ -269,7 +274,7 @@ function initMap() {
         position: results[0].geometry.location
       });
     } else {
-      console.error("Geocode was not successful: " + status);
+      console.error("Geocode was not successful for the following reason: " + status);
     }
   });
 }
@@ -316,6 +321,10 @@ document.getElementById('like-button').addEventListener('click', function () {
     });
 });
 
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap">
 </script>
 
 

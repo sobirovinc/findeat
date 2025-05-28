@@ -26,6 +26,7 @@ class HomePageView(View):
         if form.is_valid():
             for k, v in form.cleaned_data.items():
                 # checking if values is exists, and if exists adding to params dict to send it api
+                print(f"{k}:{v}")
                 if v is not None and v != '' and v != False:
                     params[k] = v
 
