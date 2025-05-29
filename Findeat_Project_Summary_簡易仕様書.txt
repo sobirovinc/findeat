@@ -1,0 +1,106 @@
+### 作者  
+ソビロフ・アリシェル
+
+### アプリ名  
+FindEat（ファインドイート）
+
+#### コンセプト  
+近くの美味しいお店がすぐ見つかる、便利なレストラン検索アプリ。
+
+#### こだわったポイント  
+- ホットペッパーAPIを活用し、ジャンルやエリア、キーワードなど多様な条件で検索可能  
+- ログインなしで「いいね」できるシンプルなUX（Cookieベースのユニーク識別）  
+- 店舗詳細ページでは写真、地図、アクセス方法などを分かりやすく表示  
+
+### 公開したアプリの URL
+https://findeat.uz/
+
+
+### GitHubリポジトリ  
+https://github.com/sobirovinc/findeat.git
+
+---
+
+## 開発環境
+
+### 使用技術・フレームワーク  
+- Python 3.10.7
+- Django==5.2.1   
+- JavaScript (Google Maps API 用)  
+- HTML/CSS（Djangoテンプレート）  
+
+### 開発ツール  
+- PyCharm
+- Figma  
+- Git / GitHub  
+  
+
+---
+
+## テーブル定義（ER図）  
+※ ER図は画像添付もしくは別資料でリンクしてもOKです  
+主なテーブル:
+- `Visitor`（クッキーで識別）  
+- `Like`（店舗IDとVisitorの関係）  
+
+---
+
+## 開発環境構築手順（ローカル）  
+1. 仮想環境の作成と有効化  
+
+python -m venv env  
+source env/bin/activate  # Windows: env\Scripts\activate  
+
+
+2. パッケージのインストール  
+
+pip install -r requirements.txt
+
+
+3. `.env`の作成と設定（APIキー、SECRET_KEYなど）  
+
+4. データベースの初期化  
+
+python manage.py migrate　
+
+
+5. サーバー起動  
+
+python manage.py runserver
+
+
+---
+
+## 対象OS・ブラウザ  
+- PC: Chrome / Firefox / Edge 最新版  
+- スマホ: Chrome, Safari（レスポンシブ対応）
+
+---
+
+## 開発期間  
+約10日間
++2日間デプロイメント
+
+---
+
+## アプリケーション機能
+
+### 主な機能  
+- 飲食店検索（位置情報・キーワード・ジャンル・予算など）  
+- 店舗詳細ページ（住所・画像・ジャンル・地図表示・アクセスなど）  
+- 「いいね」機能（Cookieベース）  
+- Google Maps API連携（地図表示）  
+
+---
+
+### 使用API・ライブラリ  
+- ホットペッパーグルメサーチAPI  
+- Google Maps JavaScript API  
+- Django   
+
+---
+
+### 技術的アドバイスが欲しいポイント  
+- Cookieを使った「いいね」機能のセキュリティと拡張性  
+- 地図と店舗リストのUI/UX最適化（スマホでの表示含む）  
+- ページのパフォーマンス改善（API呼び出し効率など）
